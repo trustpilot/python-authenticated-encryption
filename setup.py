@@ -17,4 +17,6 @@ setup(
     package_dir={'trustpilot_authenticated_encryption': 'trustpilot_authenticated_encryption'},
     include_package_data=True,
     install_requires=requirements,
+    author='Trustpilot',
+    license='MIT'
 )
