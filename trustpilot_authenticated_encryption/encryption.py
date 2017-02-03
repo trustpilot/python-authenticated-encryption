@@ -8,6 +8,17 @@ BLOCK_SIZE = 16
 
 
 def encrypt(msg, encrypt_key, hash_key):
+    """
+    Encrypt and hash a message.
+
+    Args:
+        param msg: Bytes to encrypt
+        param encrypt_key: Base64 encoded encryption key
+        param hash_key: Base64 encoded hash key
+
+    Returns:
+        Base 64 encoded message
+    """
     encrypt_key = base64.b64decode(encrypt_key)
     hash_key = base64.b64decode(hash_key)
 
