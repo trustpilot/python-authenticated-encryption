@@ -6,4 +6,4 @@ def test():
     hash_key = "oGmd/bHHkd+N6P6lZQxyfikjU7c5P/mhWO/noCsERyY="
     encrypted = encrypt(message.encode("utf-8"), encrypt_key, hash_key)
 
-    print(encrypted.decode("ascii")) # should be assert
+    assert len(encrypted.decode("ascii")) == 108
