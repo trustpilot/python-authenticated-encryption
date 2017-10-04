@@ -1,10 +1,14 @@
 # Trustpilot authenticated encryption for python
 
+[![Build Status](http://travis-ci.org/trustpilot/python-authenticated-encryption.svg?branch=master)](https://travis-ci.org/trustpilot/python-authenticated-encryption)  [![Latest Version](https://img.shields.io/pypi/v/trustpilot_authenticated_encryption.svg)](https://pypi.python.org/pypi/trustpilot_authenticated_encryption) [![Python Support](https://img.shields.io/pypi/pyversions/trustpilot_authenticated_encryption.svg)](https://pypi.python.org/pypi/trustpilot_authenticated_encryption)
+
 Library for authenticated encryption used with Trustpilot.
 
 ## Install
-- `pip install git+https://github.com/trustpilot/python-authenticated-encryption@1.0.0`
-- Omit @{version} at the end to install the latest source version
+
+```
+pip install trustpilot_authenticated_encryption
+```
 
 ## Usage
 To encrypt a message
