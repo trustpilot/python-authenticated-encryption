@@ -1,17 +1,54 @@
+sudo: required
 language: python
-
+addons:
+  apt_packages:
+  - pandoc
 python:
-  - "2.7"
-  - "3.3"
-  - "3.4"
-  - "3.5"
-  - "3.6"
+- '2.7'
+- '3.3'
+- '3.4'
+- '3.5'
+- "3.6"
 
 install:
-  - pip install -r requirements.txt
+- pip install pypandoc
+- pip install .
 
 script:
-  - python -m unittest discover tests/
+- python -m unittest discover tests/
 
 branches:
   only: master
+
+after_success:
+- git config --global user.email "travis@travis-ci.org"
+- git config --global user.name "Travis"
+- git tag -a v$(python setup.py --version) -m "Travis build $TRAVIS_BUILD_NUMBER pushed
+  a tag."
+- git push origin --tags
+- git fetch origin
+
+deploy:
+  - provider: pypi
+    skip_cleanup: true
+    distributions: sdist
+    user: "trustpilot"
+    password:
+      secure: lVpNewz7Xn9e8hy3s2TIIHsMEIWQ3AqPmQZYiM1hXin/2qOXfe65ekEyHACfDu8P/iD+4v3qgI7xOaXH5dcFFOu8/C8GQ7V6GKSOZ6h08W0YQN7/iv3GPAXAMIPYgn0DaA0JUwy838xAUG764zK/Xejlbj6/4Zkw6mbWUBu95Q65IeSdXWpk82L4GrVSbEAtuDgtDAyy1KpNG60Ijqo7A8IbaSeJzsozRiKhwQnRzKzaQGV3UJnA+MBmTRGpS6Tr0Mhr5W5RQcksvoffbOyJB2MDQPieo/7SNdQAJ/PKtEtthTBK1/iQsVnPsKOV35rY/h1wwz5YhZtNiaaGKSFmvhyzwmfhjl94rLDxl6yGuS4q0ioocezjFuanSZrMYSg6L2gCq29oqJfJd5bBEWmfJ73E26yarxRrfKjhjpB3qZtw3gNo1EgyAW8UKxUmDcdPygd8X8EQX3ytrrSMcK/dpOWccV5hTXawsbBUMsxzx76EtP8WZ48P9c4LXtTs1WX0NC7HtjXiMFsK+ZD4navkwFUdLNEyAnoGm4DJ/NAQp/70mgBCqUEt5tvmu5Yt2K9mGJ9yTPBqgffR2iiBTkX/v9v0yhv8Nb6gJhasD90/kqnAfbdLERJ1xqEsrIGzIZ1F0J5fUhuVcJiuatkjny/1J7x43AIFDn4KZZ18Ws4Zwzo=
+    on:
+      tags: false
+      branch: master
+      repo: trustpilot/python-authenticated-encryption
+      condition: $TRAVIS_PYTHON_VERSION = "2.7"
+  - provider: releases
+    skip_cleanup: true
+    api-key:
+      secure: WkiR5PDXisJF0WkMehpXtJ6G4ogk60m0N3eovcryTGdCMnfoFgzJPO52RwMUAWtEUep9mUbXKqmx2N/aGMXjHLCYCDTwO511r5rRRHiHLewCrlG3VbuFhtot+s0+Oy6xqoKZUH8o9FH405S2O2uTit9Jw+BUvgHsh5OC1bhk484UUz7wm71jo8Q9CDCiQ556DtBXDiEQ2ytFu79aFiE+nFxJqNPq6Kr55A0xFlJJuqdSh5+0jFIkWvT8GCa+YAuFeoksVjwfKvzs/5I/rSqtcCy85pu1lmUnRsvwU0TNOZXBvJfMdRsbG5UsD2WAYq1MhZHM24XKkHOwgfv2448BW0vKxU0yS0V/xPNWRjrnFhL8Mx69wXga8X0MGNJD4EGq6iFPpx35yS5TMWKQB3Fu+9j4iqfkj3GKFB3LnqaMCZSuVJ026uYlK5gQSyly+J8xt0Aj0SD+KDy4Jsnu6aE0nH64VoQaXbz0iutpLp27PDXvUCIHEg/Z4oFz9XGalI1Q/2mgLH+TcXNgECKBeorLtI7C759/usMTJi2WGQiOUynS1UxtveoKSGbjHmsip9yjBp0wkW/jUER5JMF0v1yNyPWQfQ11JRR+sOgvQvm4rLC5/fPrKQ60ZNZb2rIebF6LH2Nc78NbMo9BkdtpzhUqWF2crTLb/byOHvtZRj3nrm4=
+    file_glob: true
+    file: dist/*
+    on:
+      tags: false
+      branch: master
+      repo: trustpilot/python-authenticated-encryption
+      condition: $TRAVIS_PYTHON_VERSION = "2.7"
+
