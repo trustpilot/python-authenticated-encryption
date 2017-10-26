@@ -20,7 +20,7 @@ requirements = [
 
 setup(
     name='trustpilot_authenticated_encryption',
-    version='1.0.1',
+    version='1.0.2',
     description="Library for authenticated encryption used with Trustpilot",
     long_description=read_md('README.md'),
     url='https://github.com/trustpilot/python-authenticated-encryption',
