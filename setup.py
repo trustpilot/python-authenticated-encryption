@@ -15,12 +15,12 @@ except ImportError:
 
 
 requirements = [
-    'pycryptodome==3.4.4'
+    'pycryptodome==3.6.6'
 ]
 
 setup(
     name='trustpilot_authenticated_encryption',
-    version='1.0.2',
+    version='1.1.0',
     description="Library for authenticated encryption used with Trustpilot",
     long_description=read_md('README.md'),
     url='https://github.com/trustpilot/python-authenticated-encryption',
