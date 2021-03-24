@@ -15,7 +15,7 @@ except ImportError:
 
 
 requirements = [
-    'pycryptodome==3.6.6'
+    'pycryptodome>=3.6.6'
 ]
 
 setup(
